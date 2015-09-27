@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LocaList</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="location.css" type="text/css">
+  </head>
+  <body onload="initMap">
+    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+    <button id="pac-button" onclick="setLocation()">Set Location</button>
+    <div id="map"></div>
+    <div id="userLoc"></div>
+
+    <script src="location.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWCBJKNSWIy-qZ-NSoQPbKJubUtxK5kTI&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+  </body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <title>LocaList: Your next handy list</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="location.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top"  onclick = $("#menu-close").click(); >LocaList</a>
+            </li>
+            <li>
+                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+            </li>
+            <li>
+                <a href="#about" onclick = $("#menu-close").click(); >Make Your Lists</a>
+            </li>
+            <li>
+                <a href="#services" onclick = $("#menu-close").click(); >About</a>
+            </li>
+            <li>
+                <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
+            </li>
+            <li>
+                <a href="#contact" onclick = $("#menu-close").click(); >Map</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>LocaList</h1>
+            <h3>LocaList for your loooca life</h3>
+            <br>
+            <a href="#about" class="btn btn-dark btn-lg">Make Your Lists</a>
+        </div>
+    </header>
+
+    <!-- About -->
+
+
+
+
+    <script>
+
+    var lists = [];
+
+    function newList() {
+
+        var lastlName = prompt("What's your list's name", "Yo List");
+        var demoStr = "demo" + lists.length;
+
+        document.getElementById(demoStr).innerHTML = lastlName;
+        var list = {lName:lastlName, con:[], loc:"location"};
+        // alert("name " + list.lName);
+        // alert("items " + list.con);
+        // alert("location " + list.loc);
+        lists.push(list);
+        // getName(index);
+        // con = list.contents;
+        // window.alert(lName);
+        // index = index + 1;
+    }
+
+    function getName(anIndex) {
+        // alert(lists[anIndex].lName);
+        return lists[anIndex].lName;
+    }
+
+    function getItems(anIndex) {
+        return lists[anIndex].con;
+    }
+
+    function getLocation(anIndex) {
+        return lists[anIndex].loc;
+    }
+
+    // function setItems(anIndex, anItem) {
+    // getItems(anIndex).push(anItem);
+    // alert(getItems(anIndex));
+    // }
+
+    // function deleteItems(anIndex, anI) {
+    //     getItems(anIndex).splice(anI,1);
+    //     alert(getItems(anIndex));
+
+    // }
+
+
+
+    function addList(myTable, index) {
+
+
+        var table = document.getElementById(myTable);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var b=document.getElementById('addedItem').value;
+
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.type = "text";
+        element1.style.width="100%";
+        element1.name = "txtbox[]";
+        element1.value=b;
+        cell1.appendChild(element1);
+
+        var cell2 = row.insertCell(1);
+        var element2 = document.createElement("input");
+        element2.type = "checkbox";
+        element2.name="chkbox[]";
+        cell2.appendChild(element2);
+
+        var newItem = document.getElementById('addedItem').value;
+        // document.getElementById('pTotal').innerHTML= rowCount + 1;
+
+        // setItems(index, newItem);
+        getItems(index).push(newItem);
+    }
+
+    function deleteList(myTable, index) {
+
+        var table = document.getElementById(myTable);
+        var rowCount = table.rows.length;
+
+        for(var i=0; i<rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[1].childNodes[0];
+            if(null != chkbox && true == chkbox.checked) {
+                table.deleteRow(i);
+                // deleteItems(index,i);
+                getItems(index).splice(i,1);
+                // con.splice(i,1);
+                rowCount--;
+                i--;
+            }
+        }
+
+        alert(getItems(index));
+    }
+
+    </script>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Start organizing your "loca" live with LocaList</h2>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <button type="button" class="btn btn-primary btn-block" onClick="newList()">New List!</button>
+            <br>
+            <center>
+            <input type="textbox" id="addedItem" />
+        </center>
+
+
+            <br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="panel panel-default">
+                            <div class="row padall">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <span></span>
+                                    <i class="fa fa-star-o  fa-5x"></i>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <br>
+
+                                            <button type="button" class="btn btn-primary btn-block" onClick="addList('ToDoListTable0', 0)">Add item to list 1</button>
+                                            <button type="button" class="btn btn-primary btn-block" onClick="deleteList('ToDoListTable0', 0)">Delte item from list 1</button>
+
+                                            <h3 id = "demo0">  </h3>
+                                            <table id="ToDoListTable0" width="350px" border=".5"></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="panel panel-primary">
+                            <div class="row padall">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <span></span>
+                                    <i class="fa fa-star-o  fa-5x"></i>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <button type="button" class="btn btn-primary btn-block" onClick="addList('ToDoListTable1', 1)">Add item to list 2!</button>
+                                            <button type="button" class="btn btn-primary btn-block" onClick="deleteList('ToDoListTable1', 1)">Delte item from list 2</button>
+
+                                            <h3 id = "demo1">  </h3>
+                                            <table id="ToDoListTable1" width="350px" border=".5"></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+            img {
+                max-width: 110%;
+                height: auto;
+            }
+
+            .clearfix {
+                clear:both;
+            }
+
+            .rowcolor {
+                background-color:#CCCCCC;
+            }
+
+            .padall {
+                padding:10px;
+            }
+
+            .icon {
+                font-size:23px;
+                color:#197BB5;
+            }
+            </style>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+
+
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>About LocaList</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <p>Our mobile app allows people create lists and get alerts to remind them at specific locations.</p>
+                        <p>This is great for people who need a quick reminder for what tasks they need to do when they are</p>
+                        <p>around a certain radius of land. Then people can easily pull up their list to make their lives less</p>
+                        <p>LOCA!</p>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Callout -->
+    <aside class="callout">
+        <div class="text-vertical-center">
+            <h1>Access to your important tasks.</h1>
+        </div>
+    </aside>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h2>Our Work</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+
+    <!-- Map -->
+        <section id="contact" class="map">
+        <body onload="initMap">
+        <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+        <button id="pac-button" onclick="setLocation()">Set Location</button>
+        <div id="map"></div>
+        <div id="userLoc"></div>
+        </body>
+<!--         <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+        <br />
+        <small>
+            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
+        </small>
+        </iframe> -->
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>LocaList</strong>
+                    </h4>
+                    <p>Ellie Kang<br>Arsh Momin<br>Christine Shih<br>Arshiya Singh</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:awesome@possum.com">awesome@possum.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; LocaList 2015</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+    <script src="location.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWCBJKNSWIy-qZ-NSoQPbKJubUtxK5kTI&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+
+</body>
+
+</html>
